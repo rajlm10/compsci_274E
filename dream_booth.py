@@ -8,17 +8,13 @@ import shutil
 import warnings
 from pathlib import Path
 
-import numpy as np
 import torch
 import torch.nn.functional as F
 import torch.utils.checkpoint
 import transformers
 from accelerate import Accelerator
 from accelerate.logging import get_logger
-from accelerate.utils import DistributedDataParallelKwargs, ProjectConfiguration, set_seed
-from huggingface_hub import create_repo, upload_folder
-from huggingface_hub.utils import insecure_hashlib
-from packaging import version
+from accelerate.utils import DistributedDataParallelKwargs, ProjectConfiguration
 from PIL import Image
 from PIL.ImageOps import exif_transpose
 from torch.utils.data import Dataset
@@ -30,16 +26,14 @@ import diffusers
 from diffusers import (
     AutoencoderKL,
     DDPMScheduler,
-    DPMSolverMultistepScheduler,
     StableDiffusionXLPipeline,
     UNet2DConditionModel,
 )
 from diffusers.loaders import LoraLoaderMixin
 from diffusers.models.lora import LoRALinearLayer
 from diffusers.optimization import get_scheduler
-from diffusers.training_utils import compute_snr, unet_lora_state_dict
-from diffusers.utils import check_min_version, is_wandb_available
-from diffusers.utils.import_utils import is_xformers_available
+from diffusers.training_utils import  unet_lora_state_dict
+
 
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
